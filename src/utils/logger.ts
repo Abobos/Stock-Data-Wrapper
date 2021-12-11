@@ -21,7 +21,7 @@ const options = {
     level: "error",
     filename: `${process.cwd()}/logs/error.log`,
     handleExceptions: true,
-    maxsize: 5242880, // 5MB
+    maxsize: 5242880,
     maxFiles: 5,
     colorize: false,
   },
@@ -29,7 +29,7 @@ const options = {
     level: "info",
     filename: `${process.cwd()}/logs/app.log`,
     handleExceptions: true,
-    maxsize: 5242880, // 5MB
+    maxsize: 5242880,
     maxFiles: 5,
     colorize: false,
   },

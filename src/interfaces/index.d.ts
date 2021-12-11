@@ -19,27 +19,6 @@ export interface queryParamsIII extends queryParamsI {
   orderBy?: string;
 }
 
-export interface queryParamsIV {
-  column: string;
-  condition: string;
-  values: string;
-  columnII?: string;
-  valuesII?: string;
-}
-
 export interface objectLiteral {
   [props: string]: any;
-}
-
-export interface UserData {
-  id: number;
-  email: string;
-}
-
-export interface AvailableCars {
-  name: string;
-  car_number: string;
-  phone_number: string;
-  latitude: string;
-  longitude: string;
 }

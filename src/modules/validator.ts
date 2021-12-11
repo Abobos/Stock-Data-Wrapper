@@ -1,15 +1,13 @@
 import { objectLiteral } from "../interfaces";
 
-export const emailRegex: RegExp =
-  /^[A-Za-z0-9.-_]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
-
-export const nameRegex: RegExp = /^[A-Za-z]+\s([A-Za-z]+\s)?[A-Za-z]+$/;
+export const nameRegex: RegExp = /^[A-Za-z]+$/;
 
 export const magicTrimmer = (payload: objectLiteral): objectLiteral => {
   const data = {};
 
   Object.keys(payload).forEach((key) => {
     const value: any = payload[key];
+
     Object.assign(data, {
       [key]: typeof value !== "string" ? value : value.trim(),
     });
@@ -20,16 +18,20 @@ export const magicTrimmer = (payload: objectLiteral): objectLiteral => {
 
 export const validateAgainstRegex = (
   value: string,
-  regex: RegExp,
-  regexType: string
+  regexType: string,
+  regex?: RegExp
 ): any => {
   let errorMessage: string = "";
 
-  if (typeof value !== "number") {
-    if (!value) return null;
+  if (regex) {
+    if (!regex.test(value)) errorMessage = `${regexType} is not valid`;
+  } else {
+    if (!Boolean(Number(value))) {
+      errorMessage = `${regexType} is not valid`;
+    }
   }
 
-  return;
+  return errorMessage;
 };
 
 export const errorChecker = (payload: objectLiteral): string[] | null => {
@@ -38,10 +40,6 @@ export const errorChecker = (payload: objectLiteral): string[] | null => {
   Object.keys(payload).forEach((key) => {
     if (payload[key]) {
       result[key] = payload[key];
-    }
-
-    if (payload[key] === null) {
-      result[key] = `${key} is required`;
     }
   });
 

@@ -1,3 +1,4 @@
+import { ObjectProps } from "@services/types";
 import { Response } from "express";
 
 export const sendErrorResponse = (
@@ -13,12 +14,14 @@ export const sendErrorResponse = (
 export const sendSuccessResponse = (
   res: Response,
   code: number,
-  message: any,
-  data: any
+  message: string,
+  data: ObjectProps,
+  nextPage?: string
 ) =>
   res.status(code).send({
     status: "success",
     message,
+    nextPage,
     data,
   });
 

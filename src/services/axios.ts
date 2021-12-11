@@ -5,8 +5,7 @@ import configuration from "@config/configuration";
 import { logger } from "@utils/logger";
 
 import { ObjectProps } from "./types";
-import { CustomError, InternalServerError } from "@exceptions/index";
-import { response } from "express";
+import { CustomError } from "@exceptions/index";
 
 class Axios {
   private API_BASE_URL: string;
@@ -17,10 +16,7 @@ class Axios {
     this.API_KEY = configuration().Polygon.key;
   }
 
-  public async get(
-    endpoint: string,
-    queryParams: ObjectProps
-  ): Promise<ObjectProps> {
+  public async get<T>(endpoint: string, queryParams: ObjectProps): Promise<T> {
     try {
       const options = {
         headers: {
@@ -31,20 +27,20 @@ class Axios {
         },
       };
 
-      const { data } = await axios.get<ObjectProps>(
+      const { data } = await axios.get(
         `${this.API_BASE_URL}/${endpoint}`,
         options
       );
 
       return data;
     } catch (error: any) {
-      console.log(error.response);
-
       logger.error(
         `An error occurred from calling stock API ${JSON.stringify(
           error.response.statusText
         )}`
       );
+
+      throw new CustomError(error.response.statusText, error.response.status);
     }
   }
 }

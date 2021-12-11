@@ -1,16 +1,11 @@
+import { CustomError } from "@exceptions/index";
 import { Request, Response, NextFunction, Application } from "express";
 
-import { InternalServerError } from "../exceptions";
 import { logger } from "../utils";
 
 export const defaultErrorHandler = (app: Application) =>
   app.use(
-    (
-      error: InternalServerError,
-      _req: Request,
-      res: Response,
-      _next: NextFunction
-    ) => {
+    (error: CustomError, _req: Request, res: Response, _next: NextFunction) => {
       const statusCode = error.statusCode || 500;
 
       process.env.NODE_ENV !== "production" &&

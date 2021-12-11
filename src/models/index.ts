@@ -1,11 +1,6 @@
 import db from "@config/pool";
 
-import {
-  queryParamsI,
-  queryParamsII,
-  queryParamsIII,
-  queryParamsIV,
-} from "../interfaces";
+import { queryParamsII, queryParamsIII } from "../interfaces";
 import { logger } from "../utils";
 
 class UniversalModel {
@@ -33,37 +28,6 @@ class UniversalModel {
     const result = await db.query(queryStatement);
 
     return result;
-  }
-
-  async delete(queryDetails: queryParamsI): Promise<any> {
-    const queryStatement = `DELETE FROM ${this.resource} WHERE ${queryDetails.condition}`;
-    logger.info(queryStatement);
-
-    const result = await db.query(queryStatement);
-
-    return result;
-  }
-
-  async update(queryDetails: queryParamsIV): Promise<any> {
-    const queryStatement = `UPDATE ${this.resource} SET ${queryDetails.column} = '${queryDetails.values}'
-                            WHERE ${queryDetails.condition} RETURNING ${queryDetails.column}`;
-    logger.info(queryStatement);
-
-    const { rows } = await db.query(queryStatement);
-
-    console.log(rows);
-
-    return rows;
-  }
-
-  async updateMultiple(queryDetails: queryParamsIV): Promise<any> {
-    const queryStatement = `UPDATE ${this.resource} SET ${queryDetails.column} = ${queryDetails.values}, ${queryDetails.columnII} = ${queryDetails.valuesII}
-                            WHERE ${queryDetails.condition} RETURNING ${queryDetails.column}`;
-    logger.info(queryStatement);
-
-    const { rows } = await db.query(queryStatement);
-
-    return rows;
   }
 }
 

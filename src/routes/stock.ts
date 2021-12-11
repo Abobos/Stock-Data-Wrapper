@@ -5,4 +5,6 @@ const stockRouter = Router();
 
 stockRouter.get("/stocks/tickers", StockController.getStockTickers);
 
+stockRouter.get("/stocks", StockController.getGroupedStockData);
+
 export default stockRouter;
