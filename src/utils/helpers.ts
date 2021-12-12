@@ -1,4 +1,4 @@
-import { ObjectProps } from "@services/types";
+import { ObjectProps } from "@utils/types";
 
 export const getOnlyValueFromQueryData = (
   queryParamsValue: ObjectProps | string
@@ -15,13 +15,33 @@ export const getValueAndOperator = (
 ): { value: string; operator: string } => {
   if (typeof queryParamsValue === "object") {
     if (queryParamsValue["lte"]) {
-      return { value: queryParamsValue, operator: "lte" };
+      return { value: queryParamsValue["lte"], operator: "lte" };
     }
 
     if (queryParamsValue["gte"]) {
-      return { value: queryParamsValue, operator: "gte" };
+      return { value: queryParamsValue["gte"], operator: "gte" };
     }
   } else {
-    return { value: queryParamsValue, operator: "" };
+    return { value: queryParamsValue, operator: "eql" };
+  }
+};
+
+export const getFilterCondition = (value: any, filterParam: any) => {
+  switch (filterParam.operator) {
+    case "lte": {
+      return value <= filterParam.value;
+    }
+
+    case "gte": {
+      return value >= filterParam.value;
+    }
+
+    case "eql": {
+      return value === filterParam.value;
+    }
+
+    default: {
+      return false;
+    }
   }
 };

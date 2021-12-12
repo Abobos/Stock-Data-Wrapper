@@ -8,6 +8,7 @@ import indexRoute from "./routes";
 import { defaultErrorHandler } from "@middlewares/error";
 
 import swaggerDocument from "./swagger.json";
+import { saveBestStockEntities } from "@services/scheduler";
 
 export class App {
   public app: Application;
@@ -37,6 +38,8 @@ export class App {
     );
 
     this.app.use(indexRoute);
+
+    saveBestStockEntities();
 
     defaultErrorHandler(this.app);
   }

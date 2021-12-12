@@ -1,11 +1,11 @@
 import axios from "axios";
 
-import configuration from "@config/configuration";
+import configuration from "../config/configuration";
 
-import { logger } from "@utils/logger";
+import { logger } from "../utils/logger";
 
 import { ObjectProps } from "./types";
-import { CustomError } from "@exceptions/index";
+import { CustomError } from "../exceptions/index";
 
 class Axios {
   private API_BASE_URL: string;
@@ -32,15 +32,15 @@ class Axios {
         options
       );
 
+      logger.info(`Result from API call ${JSON.stringify(data)}`);
+
       return data;
     } catch (error: any) {
       logger.error(
-        `An error occurred from calling stock API ${JSON.stringify(
-          error.response.statusText
-        )}`
+        `An error occurred from calling stock API ${JSON.stringify(error)}`
       );
 
-      throw new CustomError(error.response.statusText, error.response.status);
+      throw new CustomError(error.response?.statusText, error.response?.status);
     }
   }
 }

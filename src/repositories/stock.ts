@@ -1,7 +1,49 @@
-class StockRepository {
-  constructor() {}
+import UniversalModel from "../models/index";
 
-  async insert(column: string, values: string) {}
+class StockDataRepository {
+  public stockDataRepository: UniversalModel;
+
+  constructor() {
+    this.stockDataRepository = new UniversalModel("StockData");
+  }
+
+  async create(column: string, values: string) {
+    try {
+      const result = await this.stockDataRepository.insert({
+        column,
+        values,
+      });
+
+      return result;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async findOne(column: string, condition: string) {
+    try {
+      const result = await this.stockDataRepository.select({
+        column,
+        condition,
+      });
+
+      return result.rowCount;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async findAll(column: string, condition: string) {
+    try {
+      const result = await this.stockDataRepository.select({
+        column,
+        condition,
+      });
+      return result;
+    } catch (e) {
+      throw e;
+    }
+  }
 }
 
-export default new StockRepository();
+export default new StockDataRepository();

@@ -1,4 +1,4 @@
-import db from "@config/pool";
+import db from "../config/pool";
 
 import { queryParamsII, queryParamsIII } from "../interfaces";
 import { logger } from "../utils";

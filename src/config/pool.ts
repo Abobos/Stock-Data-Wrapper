@@ -14,7 +14,7 @@ const config = process.env[envVariable];
 const pool = new Pool({
   connectionString: config,
 
-  ...(env !== "development" && { ssl: { rejectUnauthorized: false } }),
+  ...(env === "production" && { ssl: { rejectUnauthorized: false } }),
 });
 
 pool

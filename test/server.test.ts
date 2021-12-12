@@ -16,3 +16,7 @@ describe("App", () => {
     expect(res.body.error).toEqual("This route is unavailable on the server");
   });
 });
+
+afterAll(() => {
+  app.close();
+});

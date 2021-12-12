@@ -1,4 +1,4 @@
-import { ObjectProps } from "@services/types";
+import { ObjectProps } from "@utils/types";
 import { Response } from "express";
 
 export const sendErrorResponse = (
