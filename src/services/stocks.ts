@@ -37,7 +37,7 @@ class StockService {
   static async getStockAggregatedData(query: any) {
     try {
       const response = await axiosInstance.get<TickersResult>(
-        `v2/aggs/ticker/${query.ticker}/range/1/${query.day}/${query.startDate}/${query.endDate}`,
+        `v2/aggs/ticker/${query.ticker}/range/1/${query.timespan}/${query.startDate}/${query.endDate}`,
         {
           adjusted: false,
           sort: "asc",

@@ -1,0 +1,44 @@
+{
+  "results": [
+    {
+      "ticker": "AAC",
+      "name": "Ares Acquisition Corporation",
+      "market": "stocks",
+      "locale": "us",
+      "primary_exchange": "XNYS",
+      "type": "CS",
+      "active": true,
+      "currency_name": "usd",
+      "cik": "0001829432",
+      "last_updated_utc": "2021-12-10T00:00:00Z"
+    },
+    {
+      "ticker": "AAC.U",
+      "name": "Ares Acquisition Corporation Units, each consisting of one Class A ordinary share, and one-fifth of",
+      "market": "stocks",
+      "locale": "us",
+      "primary_exchange": "XNYS",
+      "type": "UNIT",
+      "active": true,
+      "currency_name": "usd",
+      "cik": "0001829432",
+      "last_updated_utc": "2021-12-10T00:00:00Z"
+    },
+    {
+      "ticker": "AAC.WS",
+      "name": "Ares Acquisition Corporation Redeemable Warrants, each whole warrant exercisable for one Class A ord",
+      "market": "stocks",
+      "locale": "us",
+      "primary_exchange": "XNYS",
+      "type": "WARRANT",
+      "active": true,
+      "currency_name": "usd",
+      "cik": "0001829432",
+      "last_updated_utc": "2021-12-10T00:00:00Z"
+    }
+  ],
+  "status": "OK",
+  "request_id": "1de7e9f78131af9b0c64aaf112eaee67",
+  "count": 15,
+  "next_url": "https://api.polygon.io/v3/reference/tickers?cursor=YWN0aXZlPXRydWUmZGF0ZT0yMDIxLTEyLTExJmxpbWl0PTE1Jm1hcmtldD1zdG9ja3Mmb3JkZXI9YXNjJnBhZ2VfbWFya2VyPUFBSUNwQiU3QzAyNzYzZDc3NWJiNWM5YmIyMzMxNDk1N2YzZTVjZTYxNzU0YTJmYzI1NzY5YjVlYmY0ZDNjZGJiM2U3N2YxMTQmc29ydD10aWNrZXI"
+}

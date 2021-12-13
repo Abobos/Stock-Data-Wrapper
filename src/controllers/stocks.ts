@@ -28,6 +28,24 @@ class StockController {
       return next(error);
     }
   }
+  static async getGroupedStockData(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const { results } = await StockService.getGroupedStockData(req.query);
+
+      sendSuccessResponse(
+        res,
+        200,
+        "Grouped stock data retrieved successfully",
+        results
+      );
+    } catch (error) {
+      return next(error);
+    }
+  }
 
   static async getStockAggregatedData(
     req: Request,
@@ -43,24 +61,33 @@ class StockController {
     }
   }
 
-  static async getGroupedStockData(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) {
-    try {
-      const { results } = await StockService.getGroupedStockData(req.query);
+  // static async getPreviouseCLoseStockData(
+  //   req: Request,
+  //   res: Response,
+  //   next: NextFunction
+  // ) {
+  //   try {
+  //     const results = await StockService.getStockAggregatedData(req.query);
 
-      sendSuccessResponse(
-        res,
-        200,
-        "Stock data retrieved successfully",
-        results
-      );
-    } catch (error) {
-      return next(error);
-    }
-  }
+  //     sendSuccessResponse(res, 200, "Aggregate stock data", results);
+  //   } catch (error) {
+  //     return next(error);
+  //   }
+  // }
+
+  // static async getDailyOpenCloseStockData(
+  //   req: Request,
+  //   res: Response,
+  //   next: NextFunction
+  // ) {
+  //   try {
+  //     const results = await StockService.getStockAggregatedData(req.query);
+
+  //     sendSuccessResponse(res, 200, "Aggregate stock data", results);
+  //   } catch (error) {
+  //     return next(error);
+  //   }
+  // }
 }
 
 export default StockController;

@@ -1,31 +1,67 @@
 import app from "../src/server";
 
 import request from "supertest";
-
 import nock from "nock";
 
-import data from "./data.json";
+import configuration from "../src/config/configuration";
+
+import tickerResults from "./tickerDetails.json";
+import groupedStockedData from "./groupedStockData.json";
 
 describe("Stock Data", () => {
   test("Should return all Ticket Details that includes the name of stock/equity which is the name of the company ", async () => {
-    nock(
-      "https://api.polygon.io/v3/reference/tickers?market=stocks&active=true&sort=ticker&order=asc&limit=15",
-      {
-        reqheaders: {
-          "content-type": "application/json",
-          authorization: "Bearer l5lFzZ72AW25uCj316ZtypDFwUp6Pkx1",
-        },
-      }
-    )
-      .get("")
-      .reply(200, {
-        data,
-      });
+    nock(configuration().Polygon.url, {
+      reqheaders: {
+        Authorization: `Bearer ${configuration().Polygon.key}`,
+      },
+    })
+      .get("/v3/reference/tickers")
+      .query({
+        market: "stocks",
+        active: true,
+        sort: "ticker",
+        order: "asc",
+        limit: "15",
+      })
+      .reply(200, tickerResults);
 
-    //api.polygon.io/v3/reference/tickers?market=stocks&active=true&sort=ticker&order=asc&limit=1
-    const res = await request(app).get("/api/v1/stocks/tickers");
+    const res = await request(app).get("/api/v1/stocks/tickers").expect(200);
 
-    console.log({ res: res.body });
+    expect(res.body).toStrictEqual({
+      status: "success",
+      message: "Tickers retrieved successfully",
+      nextPage: res.body.nextPage,
+      data: tickerResults.results,
+    });
+  });
+
+  test("Should return all Group Data", async () => {
+    nock(configuration().Polygon.url, {
+      reqheaders: {
+        Authorization: `Bearer ${configuration().Polygon.key}`,
+      },
+    })
+      .get("/v2/aggs/grouped/locale/us/market/stocks/2020-10-14")
+      .query({
+        adjusted: false,
+      })
+      .reply(200, groupedStockedData);
+
+    const res = await request(app).get("/api/v1/stocks").expect(200);
+
+    const mappedGroupData = groupedStockedData.results.map((result) => {
+      return {
+        ...result,
+        d: +(result.c - result.o).toFixed(2),
+        p: +(((result.c - result.o) / result.o) * 100).toFixed(2),
+      };
+    });
+
+    expect(res.body).toStrictEqual({
+      status: "success",
+      message: "Grouped stock data retrieved successfully",
+      data: mappedGroupData,
+    });
   });
 });
 
