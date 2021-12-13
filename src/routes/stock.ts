@@ -14,11 +14,11 @@ stockRouter.get(
 
 stockRouter.get("/stocks/aggregate", StockController.getStockAggregatedData);
 
-// stockRouter.get(
-//   "/stocks/open-close",
-//   StockController.getDailyOpenCloseStockData
-// );
+stockRouter.get(
+  "/stocks/open-close",
+  StockController.getDailyOpenCloseStockData
+);
 
-// stockRouter.get("/stocks/prev", StockController.getDailyOpenCloseStockData);
+stockRouter.get("/stocks/prev", StockController.getPreviouseCLoseStockData);
 
 export default stockRouter;

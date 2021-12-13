@@ -61,33 +61,38 @@ class StockController {
     }
   }
 
-  // static async getPreviouseCLoseStockData(
-  //   req: Request,
-  //   res: Response,
-  //   next: NextFunction
-  // ) {
-  //   try {
-  //     const results = await StockService.getStockAggregatedData(req.query);
+  static async getPreviouseCLoseStockData(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const results = await StockService.getPreviousCloseStockData(req.query);
 
-  //     sendSuccessResponse(res, 200, "Aggregate stock data", results);
-  //   } catch (error) {
-  //     return next(error);
-  //   }
-  // }
+      sendSuccessResponse(
+        res,
+        200,
+        "Previous/Close stock data retreived",
+        results
+      );
+    } catch (error) {
+      return next(error);
+    }
+  }
 
-  // static async getDailyOpenCloseStockData(
-  //   req: Request,
-  //   res: Response,
-  //   next: NextFunction
-  // ) {
-  //   try {
-  //     const results = await StockService.getStockAggregatedData(req.query);
+  static async getDailyOpenCloseStockData(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const results = await StockService.getOpenCloseData(req.query);
 
-  //     sendSuccessResponse(res, 200, "Aggregate stock data", results);
-  //   } catch (error) {
-  //     return next(error);
-  //   }
-  // }
+      sendSuccessResponse(res, 200, "Open/Close stock data retrieved", results);
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
 
 export default StockController;

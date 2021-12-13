@@ -1,5 +1,7 @@
 import {
   GroupedDataResult,
+  OpenCloseStockDataResult,
+  PreviousCloseResult,
   TickersResult,
   TransformedGroupData,
 } from "../services/types";
@@ -45,7 +47,7 @@ class StockService {
         }
       );
 
-      return { results: response.results };
+      return response.results;
     } catch (error) {
       throw error;
     }
@@ -107,6 +109,36 @@ class StockService {
         });
       }
       return { results };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async getOpenCloseData(query: any) {
+    try {
+      const response = await axiosInstance.get<OpenCloseStockDataResult>(
+        `v1/open-close/${query.ticker}/${query.date}`,
+        {
+          adjusted: false,
+        }
+      );
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async getPreviousCloseStockData(query: any) {
+    try {
+      const response = await axiosInstance.get<PreviousCloseResult>(
+        `v2/aggs/ticker/${query.ticker}/prev`,
+        {
+          adjusted: false,
+        }
+      );
+
+      return response.results;
     } catch (error) {
       throw error;
     }

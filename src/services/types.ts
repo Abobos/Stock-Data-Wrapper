@@ -47,3 +47,39 @@ export interface TransformedGroupData extends GroupedData {
   d: number;
   p: number;
 }
+
+export interface OpenCloseStockDataResult {
+  status: string;
+  from: string;
+  symbol: string;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+  afterHours: number;
+  preMarket: number;
+}
+
+export interface PreviousCloseData {
+  T: string;
+  v: number;
+  vw: number;
+  o: number;
+  c: number;
+  h: number;
+  l: number;
+  t: number;
+  n: number;
+}
+
+export interface PreviousCloseResult {
+  ticker: string;
+  queryCount: number;
+  resultsCount: number;
+  adjusted: boolean;
+  results: PreviousCloseData[];
+  status: string;
+  request_id: string;
+  count: number;
+}
