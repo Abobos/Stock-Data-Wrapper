@@ -21,9 +21,13 @@
 - Jest
 - Supertest
 
+### API service hosted on Heroku
+
+[Stock Data Wrapper Service](https://stock-data-apis.herokuapp.com)
+
 #### API Docs
 
-- [Swagger](https://)
+- [Swagger](https://stock-data-apis.herokuapp.com/api-docs)
 
 #### Getting Started
 

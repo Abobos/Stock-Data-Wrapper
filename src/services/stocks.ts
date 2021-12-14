@@ -74,14 +74,19 @@ class StockService {
         return returnedObject;
       });
 
-      let { cost, percentagePer, name, gain } = query as any;
+      let { cost, percentagePer, name, salesOutcome } = query as any;
 
       cost = getValueAndOperator(cost);
       percentagePer = getValueAndOperator(percentagePer);
       name = getValueAndOperator(name);
-      gain = getValueAndOperator(gain);
+      salesOutcome = getValueAndOperator(salesOutcome);
 
-      if (cost.value || percentagePer.value || name.value || gain.value) {
+      if (
+        cost.value ||
+        percentagePer.value ||
+        name.value ||
+        salesOutcome.value
+      ) {
         results = results.filter((result) => {
           let filteredCondition: boolean;
 
@@ -101,8 +106,14 @@ class StockService {
             if (!filteredCondition) return;
           }
 
-          if (gain.value) {
-            filteredCondition = getFilterCondition(result.d, gain);
+          if (salesOutcome.value) {
+            if (salesOutcome.value === "gain") {
+              filteredCondition = result.d > 0;
+            }
+
+            if (salesOutcome.value === "loss") {
+              filteredCondition = result.d < 0;
+            }
 
             if (!filteredCondition) return;
           }

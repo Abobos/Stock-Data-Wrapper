@@ -28,6 +28,11 @@ export const validateAgainstRegex = (
 
   if (regex) {
     if (!regex.test(value)) errorMessage = `${regexType} is not valid`;
+  } else if (regexType === "salesOutcome") {
+    const typeOfProfits: string[] = ["gain", "loss"];
+
+    if (!typeOfProfits.includes(value))
+      errorMessage = `${regexType} should be either 'gain' or 'loss'`;
   } else {
     if (!Boolean(Number(value))) {
       errorMessage = `${regexType} is not valid`;

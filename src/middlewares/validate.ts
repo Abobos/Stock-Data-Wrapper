@@ -12,20 +12,26 @@ import { sendErrorResponse } from "@modules/sendResponse";
 import { getOnlyValueFromQueryData } from "@utils/index";
 
 export const validator = (req: Request, res: Response, next: NextFunction) => {
-  const { cost, percentagePer, gain, name, date: dateValue } = req.query;
+  const {
+    cost,
+    percentagePer,
+    salesOutcome,
+    name,
+    date: dateValue,
+  } = req.query;
 
   const costValue = getOnlyValueFromQueryData(cost);
 
   const percentagePerValue = getOnlyValueFromQueryData(percentagePer);
 
-  const gainValue = getOnlyValueFromQueryData(gain);
+  const salesOutcomeValue = getOnlyValueFromQueryData(salesOutcome);
 
   const nameValue = getOnlyValueFromQueryData(name);
 
   const data = magicTrimmer({
     costValue,
     percentagePerValue,
-    gainValue,
+    salesOutcomeValue,
     nameValue,
   });
 
@@ -45,12 +51,11 @@ export const validator = (req: Request, res: Response, next: NextFunction) => {
       cost: validateAgainstRegex(data.costValue, "cost"),
     }),
 
-    ...(gain && {
-      gain: validateAgainstRegex(data.gainValue, "gain"),
-    }),
-
-    ...(gain && {
-      gain: validateAgainstRegex(data.gainValue, "gain"),
+    ...(salesOutcome && {
+      salesOutcome: validateAgainstRegex(
+        data.salesOutcomeValue,
+        "salesOutcome"
+      ),
     }),
 
     ...(dateValue && {

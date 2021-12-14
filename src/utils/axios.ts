@@ -32,8 +32,6 @@ class Axios {
         options
       );
 
-      logger.info(`Result from API call ${JSON.stringify(data)}`);
-
       return data;
     } catch (error: any) {
       logger.error(
