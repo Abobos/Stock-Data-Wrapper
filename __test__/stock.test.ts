@@ -161,8 +161,6 @@ test("Should return all stoc data for salesOutcome 'gain'", async () => {
     .get("/api/v1/stocks?salesOutcome=gain")
     .expect(200);
 
-  console.log({ res: res.body });
-
   expect(res.body.status).toEqual("success");
   expect(res.body.message).toEqual("Grouped stock data retrieved successfully");
 
@@ -196,8 +194,6 @@ test("Should return all group data filter by salesOutcome 'loss'", async () => {
   const res = await request(app)
     .get("/api/v1/stocks?salesOutcome=loss")
     .expect(200);
-
-  console.log({ res: res.body });
 
   expect(res.body.status).toEqual("success");
   expect(res.body.message).toEqual("Grouped stock data retrieved successfully");

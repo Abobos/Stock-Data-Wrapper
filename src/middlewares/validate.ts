@@ -18,6 +18,8 @@ export const validator = (req: Request, res: Response, next: NextFunction) => {
     salesOutcome,
     name,
     date: dateValue,
+    startDate,
+    endDate,
   } = req.query;
 
   const costValue = getOnlyValueFromQueryData(cost);
@@ -59,7 +61,19 @@ export const validator = (req: Request, res: Response, next: NextFunction) => {
     }),
 
     ...(dateValue && {
-      gain: validateAgainstRegex(dateValue.toString(), "date", dateRegex),
+      date: validateAgainstRegex(dateValue.toString(), "date", dateRegex),
+    }),
+
+    ...(startDate && {
+      startDate: validateAgainstRegex(
+        startDate.toString(),
+        "startDate",
+        dateRegex
+      ),
+    }),
+
+    ...(endDate && {
+      endDate: validateAgainstRegex(endDate.toString(), "endDate", dateRegex),
     }),
   };
 

@@ -36,7 +36,9 @@
             "description": "Stock Tickers with name of entities/companies retrieved successfully",
             "schema": {
               "type": "array",
-              "$ref": "#/definitions/getTickerDetails"
+              "items": {
+                "$ref": "#/definitions/getTickerDetails"
+              }
             }
           }
         }
@@ -48,13 +50,226 @@
         "summary": "Get stock data details",
         "description": "",
         "operationId": "GetStockDataDetails",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "ticker symbol of name of entity/stock/company, the data can be gotten from /stocks/tickers api endpoint",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cost[gte]",
+            "in": "query",
+            "description": "filter by cost that is greater than or equal to a figure",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cost[lte]",
+            "in": "query",
+            "description": "filter by cost that is lesser than or equal to a figure",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cost",
+            "in": "query",
+            "description": "filter by cost that is equal to a figure",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "percentagePer[gte]",
+            "in": "query",
+            "description": "filter by percentage Performance that is greater than or equal to a figure",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "percentagePer[lte]",
+            "in": "query",
+            "description": "filter by percentage Performance that is lesser than or equal to a figure",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "percentagePer",
+            "in": "query",
+            "description": "filter by percentage Performance that is equal to a figure",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "salesOutcome",
+            "in": "query",
+            "description": "salesOutcome filters by gain or loss group data",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "requested page by pagination",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "number of items per page",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "Stock Tickers with name of entities/companies retrieved successfully",
             "schema": {
               "type": "array",
-              "$ref": "#/definitions/getStockData"
+              "items": {
+                "$ref": "#/definitions/getGroupedStockData"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stocks/aggregate": {
+      "get": {
+        "tags": ["Stocks"],
+        "summary": "Get stock data details",
+        "description": "",
+        "operationId": "GetAggregateStockData",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "ticker symbol of name of entity/stock/company, the data can be gotten from /stocks/tickers api endpoint",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "startDate of query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "endDate of query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Stock Tickers with name of entities/companies retrieved successfully",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/getAggregateStockData"
+            }
+          }
+        }
+      }
+    },
+    "/stocks/open-close": {
+      "get": {
+        "tags": ["Stocks"],
+        "summary": "Get stock data details",
+        "description": "",
+        "operationId": "GetOpenCloseData",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "ticker symbol of name of entity/stock/company, the data can be gotten from /stocks/tickers api endpoint",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "The date of the requested open/close in the format YYYY-MM-DD",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Stock Tickers with name of entities/companies retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/getOpenCloseStockData"
+            }
+          }
+        }
+      }
+    },
+    "/stocks/prev": {
+      "get": {
+        "tags": ["Stocks"],
+        "summary": "Get stock data details",
+        "description": "",
+        "operationId": "GetPreviousOpenCloseData",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "ticker symbol of name of entity/stock/company, the data can be gotten from /stocks/tickers api endpoint",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Stock Tickers with name of entities/companies retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/getAggregateStockData"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stocks/reports": {
+      "get": {
+        "tags": ["Stocks"],
+        "summary": "Get best performing data by date that is saved by the scheduler/job",
+        "description": "",
+        "operationId": "GetStockDataReport",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "description": "from date",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "end date",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Stock Tickers with name of entities/companies retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/getReportStockData"
+              }
             }
           }
         }
@@ -110,52 +325,178 @@
         "name": "getTickerDetails"
       }
     },
-    "getStockData": {
+    "getGroupedStockData": {
+      "type": "object",
+
+      "properties": {
+        "v": {
+          "type": "number",
+          "example": 14043
+        },
+        "vw": {
+          "type": "number",
+          "example": 74.472
+        },
+        "o": {
+          "type": "number",
+          "example": 76
+        },
+        "c": {
+          "type": "number",
+          "example": 73.57
+        },
+        "h": {
+          "type": "number",
+          "example": 76
+        },
+        "l": {
+          "type": "number",
+          "example": 73.45
+        },
+        "t": {
+          "type": "number",
+          "example": 1602705600000
+        },
+        "n": {
+          "type": " number",
+          "example": 342
+        }
+      },
+      "xml": {
+        "name": "getGroupedStockData"
+      }
+    },
+    "getOpenCloseStockData": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "OK"
+        },
+        "from": {
+          "type": "string",
+          "example": "2020-10-14"
+        },
+        "symbol": {
+          "type": "string",
+          "example": "AAPL"
+        },
+        "open": {
+          "type": "number",
+          "example": 14043
+        },
+        "high": {
+          "type": "number",
+          "example": 74.472
+        },
+        "low": {
+          "type": "number",
+          "example": 76
+        },
+        "close": {
+          "type": "number",
+          "example": 73.57
+        },
+        "volume": {
+          "type": "number",
+          "example": 76
+        },
+        "afterHours": {
+          "type": "number",
+          "example": 73.45
+        },
+        "preMarket": {
+          "type": "number",
+          "example": 1602705600000
+        }
+      },
+      "xml": {
+        "name": "getOpenCloseStockData"
+      }
+    },
+    "getAggregateStockData": {
+      "type": "object",
+      "properties": {
+        "T": {
+          "type": "string",
+          "example": "AAC"
+        },
+        "v": {
+          "type": "number",
+          "example": 14043
+        },
+        "vw": {
+          "type": "number",
+          "example": 74.472
+        },
+        "o": {
+          "type": "number",
+          "example": 76
+        },
+        "c": {
+          "type": "number",
+          "example": 73.57
+        },
+        "h": {
+          "type": "number",
+          "example": 76
+        },
+        "l": {
+          "type": "number",
+          "example": 73.45
+        },
+        "t": {
+          "type": "number",
+          "example": 1602705600000
+        },
+        "n": {
+          "type": " number",
+          "example": 342
+        },
+        "d": {
+          "type": "number",
+          "example": -2.43
+        },
+        "p": {
+          "type": "number",
+          "example": -3.2
+        }
+      },
+      "xml": {
+        "name": "getAggregateStockData"
+      }
+    },
+
+    "getReportStockData": {
       "type": "object",
       "properties": {
         "ticker": {
           "type": "string",
           "example": "AAC"
         },
-        "name": {
-          "type": "string",
-          "example": "1Ares Acquisition Corporation"
+        "cost": {
+          "type": "number",
+          "example": 14043
         },
-        "market": {
-          "type": "string",
-          "example": "stocks"
+        "gain": {
+          "type": "number",
+          "example": 74.472
         },
-        "locale": {
-          "type": "string",
-          "example": "us"
+        "percentage_performance": {
+          "type": "number",
+          "example": 76
         },
-        "primary_exchange": {
-          "type": "string",
-          "example": "XNYS"
+        "timestamp": {
+          "type": "number",
+          "example": 73.57
         },
-        "type": {
-          "type": "string",
-          "example": "CS"
-        },
-        "active": {
-          "type": "boolean",
-          "example": true
-        },
-        "currency_name": {
-          "type": "string",
-          "example": "usd"
-        },
-        "cik": {
-          "type": "string",
-          "example": "0001829432"
-        },
-        "last_updated_utc": {
-          "type": "string",
-          "example": "2021-12-10T00:00:00Z"
+        "created_at": {
+          "type": "number",
+          "example": 76
         }
       },
       "xml": {
-        "name": "getStockData"
+        "name": "getReportStockData"
       }
     }
   }
