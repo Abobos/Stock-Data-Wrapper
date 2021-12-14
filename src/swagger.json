@@ -27,7 +27,7 @@
     "/stocks/tickers": {
       "get": {
         "tags": ["Stocks"],
-        "summary": "Get all tickers with entitites/company name",
+        "summary": "Get all tickers with entities/company name",
         "description": "",
         "operationId": "GetTickerDetailsWithCompany",
         "produces": ["application/json"],
@@ -47,7 +47,7 @@
     "/stocks": {
       "get": {
         "tags": ["Stocks"],
-        "summary": "Get stock data details",
+        "summary": "Get Grouped stock data details with filtering options",
         "description": "",
         "operationId": "GetStockDataDetails",
         "parameters": [
@@ -139,7 +139,7 @@
     "/stocks/aggregate": {
       "get": {
         "tags": ["Stocks"],
-        "summary": "Get stock data details",
+        "summary": "Get Aggregate stock data details",
         "description": "",
         "operationId": "GetAggregateStockData",
         "parameters": [
@@ -180,7 +180,7 @@
     "/stocks/open-close": {
       "get": {
         "tags": ["Stocks"],
-        "summary": "Get stock data details",
+        "summary": "Get open/close stock data details",
         "description": "",
         "operationId": "GetOpenCloseData",
         "parameters": [
@@ -213,7 +213,7 @@
     "/stocks/prev": {
       "get": {
         "tags": ["Stocks"],
-        "summary": "Get stock data details",
+        "summary": "Get Previous Open/Close stock data details",
         "description": "",
         "operationId": "GetPreviousOpenCloseData",
         "parameters": [
@@ -242,7 +242,7 @@
     "/stocks/reports": {
       "get": {
         "tags": ["Stocks"],
-        "summary": "Get best performing data by date that is saved by the scheduler/job",
+        "summary": "Get best performing data by date",
         "description": "",
         "operationId": "GetStockDataReport",
         "parameters": [

@@ -18,8 +18,8 @@
   },
   "scripts": {
     "prebuild": "rm -rf build",
-    "build": "tsc --build tsconfig.json",
-    "start": "node build/server.js",
+    "build": "node api.js && tsc --build tsconfig.json",
+    "start": "node api.js && node build/server.js",
     "start:dev": "nodemon --exec \"npm run build && npm run start\" --watch src --ext ts",
     "db:migrate": "ts-node -- src/migrations/tables.ts",
     "db:migrate-prod": "node build/migrations/tables.js",
