@@ -1,5 +1,9 @@
-import { sendSuccessResponse } from "@modules/sendResponse";
+import {
+  sendSuccessResponse,
+  sendSuccessResponseWithPagination,
+} from "@modules/sendResponse";
 import StockService from "@services/stocks";
+import { getOffSet, getPaginationMetaData } from "@utils/pagination";
 import { Request, Response, NextFunction, query } from "express";
 
 class StockController {
@@ -36,11 +40,25 @@ class StockController {
     try {
       const { results } = await StockService.getGroupedStockData(req.query);
 
-      sendSuccessResponse(
+      const { page = 1, perPage = 15 } = req.query as any;
+
+      const offset = getOffSet(page, perPage);
+
+      const paginatedResult = results.slice(offset, page * perPage);
+
+      const paginationMeta = getPaginationMetaData(
+        results.length,
+        page,
+        perPage,
+        paginatedResult.length
+      );
+
+      sendSuccessResponseWithPagination(
         res,
         200,
         "Grouped stock data retrieved successfully",
-        results
+        paginationMeta,
+        paginatedResult
       );
     } catch (error) {
       return next(error);

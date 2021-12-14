@@ -6,8 +6,12 @@ import {
   TransformedGroupData,
 } from "../services/types";
 
-import { axiosInstance } from "../utils/axios";
-import { getFilterCondition, getValueAndOperator } from "../utils/helpers";
+import {} from "../utils/index";
+import {
+  getFilterCondition,
+  getValueAndOperator,
+  axiosInstance,
+} from "../utils/index";
 
 import StockDataRepository from "../repositories/stock";
 
@@ -121,6 +125,7 @@ class StockService {
           return filteredCondition;
         });
       }
+
       return { results };
     } catch (error) {
       throw error;

@@ -34,3 +34,18 @@ export const sendSuccessResponseII = (
     status: "success",
     message,
   });
+
+export const sendSuccessResponseWithPagination = (
+  res: Response,
+  code: number,
+  message: string,
+  paginationMetaData: ObjectProps,
+  data: ObjectProps
+) =>
+  res.status(code).send({
+    status: "success",
+    message,
+
+    paginationMetaData,
+    data,
+  });

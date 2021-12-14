@@ -1,8 +1,8 @@
 {
-  "openapi": "3.0.0",
+  "swagger": "2.0",
   "info": {
     "title": "Stock Data System Application RESTFUL API",
-    "description": "Stock Data System Application REST API is an api that exposes api endpoints that",
+    "description": "Stock Data System Application REST API is an api that exposes polygon.io stock data endpoints",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
       "name": "Blessing Makaraba",
@@ -11,6 +11,152 @@
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0.0"
+  },
+  "host": "stock-data-apis.herokuapp.com",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Stocks",
+      "description": "API endpoint for stock data in the system"
+    }
+  ],
+  "schemes": ["https", "http"],
+  "paths": {
+    "/stocks/tickers": {
+      "get": {
+        "tags": ["Stocks"],
+        "summary": "Get all tickers with entitites/company name",
+        "description": "",
+        "operationId": "GetTickerDetailsWithCompany",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Stock Tickers with name of entities/companies retrieved successfully",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/getTickerDetails"
+            }
+          }
+        }
+      }
+    },
+    "/stocks": {
+      "get": {
+        "tags": ["Stocks"],
+        "summary": "Get stock data details",
+        "description": "",
+        "operationId": "GetStockDataDetails",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Stock Tickers with name of entities/companies retrieved successfully",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/getStockData"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "getTickerDetails": {
+      "type": "object",
+      "properties": {
+        "ticker": {
+          "type": "string",
+          "example": "AAC"
+        },
+        "name": {
+          "type": "string",
+          "example": "1Ares Acquisition Corporation"
+        },
+        "market": {
+          "type": "string",
+          "example": "stocks"
+        },
+        "locale": {
+          "type": "string",
+          "example": "us"
+        },
+        "primary_exchange": {
+          "type": "string",
+          "example": "XNYS"
+        },
+        "type": {
+          "type": "string",
+          "example": "CS"
+        },
+        "active": {
+          "type": "boolean",
+          "example": true
+        },
+        "currency_name": {
+          "type": "string",
+          "example": "usd"
+        },
+        "cik": {
+          "type": "string",
+          "example": "0001829432"
+        },
+        "last_updated_utc": {
+          "type": "string",
+          "example": "2021-12-10T00:00:00Z"
+        }
+      },
+      "xml": {
+        "name": "getTickerDetails"
+      }
+    },
+    "getStockData": {
+      "type": "object",
+      "properties": {
+        "ticker": {
+          "type": "string",
+          "example": "AAC"
+        },
+        "name": {
+          "type": "string",
+          "example": "1Ares Acquisition Corporation"
+        },
+        "market": {
+          "type": "string",
+          "example": "stocks"
+        },
+        "locale": {
+          "type": "string",
+          "example": "us"
+        },
+        "primary_exchange": {
+          "type": "string",
+          "example": "XNYS"
+        },
+        "type": {
+          "type": "string",
+          "example": "CS"
+        },
+        "active": {
+          "type": "boolean",
+          "example": true
+        },
+        "currency_name": {
+          "type": "string",
+          "example": "usd"
+        },
+        "cik": {
+          "type": "string",
+          "example": "0001829432"
+        },
+        "last_updated_utc": {
+          "type": "string",
+          "example": "2021-12-10T00:00:00Z"
+        }
+      },
+      "xml": {
+        "name": "getStockData"
+      }
     }
   }
 }

@@ -54,8 +54,8 @@ To setup Stock Data System Application Rest API, These tools should be installed
 
 ### Running the app
 
-- Run `npm run start:dev` or `yarn start:dev`
+- Run `npm run start:dev` or `yarn run start:dev`
 
 ### Running the tests
 
-- Run `npm test-dev` or `yarn test-dev`
+- Run `npm test` or `yarn test`

@@ -6,7 +6,6 @@ import { logger } from "../utils";
 
 export const saveBestStockEntities = () => {
   logger.info("A job is schedule to run on daily 12:00am");
-
   scheduler.schedule("0 0 0 * * *", async () => {
     try {
       logger.info("About to retrieve stock Data from Stock Data Service");

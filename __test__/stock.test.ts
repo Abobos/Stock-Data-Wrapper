@@ -61,11 +61,12 @@ describe("Stock Data", () => {
 
     const res = await request(app).get("/api/v1/stocks").expect(200);
 
-    expect(res.body).toStrictEqual({
-      status: "success",
-      message: "Grouped stock data retrieved successfully",
-      data: groupedStockedData.results,
-    });
+    expect(res.body.status).toEqual("success");
+    expect(res.body.message).toEqual(
+      "Grouped stock data retrieved successfully"
+    );
+
+    expect(res.body.data).toStrictEqual(groupedStockedData.results);
   });
 
   test("Should return all stock data for cost greater than 26", async () => {
