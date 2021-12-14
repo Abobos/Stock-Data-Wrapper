@@ -26,6 +26,7 @@ class StockDataRepository {
         column,
         condition,
       });
+
       return result;
     } catch (e) {
       throw e;

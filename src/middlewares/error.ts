@@ -8,8 +8,7 @@ export const defaultErrorHandler = (app: Application) =>
     (error: CustomError, _req: Request, res: Response, _next: NextFunction) => {
       const statusCode = error.statusCode || 500;
 
-      process.env.NODE_ENV !== "production" &&
-        statusCode === 500 &&
+      statusCode === 500 &&
         logger.error(`${statusCode} ${error.message} \n ${error.stack}`);
 
       res.status(statusCode).send({

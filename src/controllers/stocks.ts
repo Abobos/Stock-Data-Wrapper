@@ -120,7 +120,12 @@ class StockController {
     try {
       const results = await StockService.getReportStockData(req.query);
 
-      sendSuccessResponse(res, 200, "Open/Close stock data retrieved", results);
+      sendSuccessResponse(
+        res,
+        200,
+        "Best Performing stock data retrieved",
+        results
+      );
     } catch (error) {
       return next(error);
     }
