@@ -93,6 +93,20 @@ class StockController {
       return next(error);
     }
   }
+
+  static async getReportStockData(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const results = await StockService.getReportStockData(req.query);
+
+      sendSuccessResponse(res, 200, "Open/Close stock data retrieved", results);
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
 
 export default StockController;

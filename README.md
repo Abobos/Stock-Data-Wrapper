@@ -1,6 +1,6 @@
 # Stock-Data-API
 
-- Implement the polygon.io stock market apis
+- Implement the [polygon.io](https://polygon.io/docs/stocks/) stock market apis
 
 ### Required Features
 

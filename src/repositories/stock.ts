@@ -20,19 +20,6 @@ class StockDataRepository {
     }
   }
 
-  async findOne(column: string, condition: string) {
-    try {
-      const result = await this.stockDataRepository.select({
-        column,
-        condition,
-      });
-
-      return result.rowCount;
-    } catch (e) {
-      throw e;
-    }
-  }
-
   async findAll(column: string, condition: string) {
     try {
       const result = await this.stockDataRepository.select({

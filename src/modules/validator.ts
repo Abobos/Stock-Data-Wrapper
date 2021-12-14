@@ -2,6 +2,9 @@ import { objectLiteral } from "../interfaces";
 
 export const nameRegex: RegExp = /^[A-Za-z]+$/;
 
+export const dateRegex: RegExp =
+  /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/;
+
 export const magicTrimmer = (payload: objectLiteral): objectLiteral => {
   const data = {};
 

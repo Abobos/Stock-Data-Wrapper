@@ -25,9 +25,9 @@ class UniversalModel {
                             WHERE ${queryDetails.condition}`;
     logger.info(queryStatement);
 
-    const result = await db.query(queryStatement);
+    const { rows } = await db.query(queryStatement);
 
-    return result;
+    return rows;
   }
 }
 

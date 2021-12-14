@@ -21,4 +21,6 @@ stockRouter.get(
 
 stockRouter.get("/stocks/prev", StockController.getPreviouseCLoseStockData);
 
+stockRouter.get("/stocks/reports", StockController.getReportStockData);
+
 export default stockRouter;

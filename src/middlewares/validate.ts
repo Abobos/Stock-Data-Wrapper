@@ -5,13 +5,14 @@ import {
   errorChecker,
   magicTrimmer,
   nameRegex,
+  dateRegex,
 } from "@modules/validator";
 
 import { sendErrorResponse } from "@modules/sendResponse";
 import { getOnlyValueFromQueryData } from "@utils/index";
 
 export const validator = (req: Request, res: Response, next: NextFunction) => {
-  const { cost, percentagePer, gain, name } = req.query;
+  const { cost, percentagePer, gain, name, date: dateValue } = req.query;
 
   const costValue = getOnlyValueFromQueryData(cost);
 
@@ -46,6 +47,14 @@ export const validator = (req: Request, res: Response, next: NextFunction) => {
 
     ...(gain && {
       gain: validateAgainstRegex(data.gainValue, "gain"),
+    }),
+
+    ...(gain && {
+      gain: validateAgainstRegex(data.gainValue, "gain"),
+    }),
+
+    ...(dateValue && {
+      gain: validateAgainstRegex(dateValue.toString(), "date", dateRegex),
     }),
   };
 

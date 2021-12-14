@@ -9,6 +9,8 @@ import {
 import { axiosInstance } from "../utils/axios";
 import { getFilterCondition, getValueAndOperator } from "../utils/helpers";
 
+import StockDataRepository from "../repositories/stock";
+
 class StockService {
   static async getStockTickers(cursor: string) {
     try {
@@ -39,7 +41,7 @@ class StockService {
   static async getStockAggregatedData(query: any) {
     try {
       const response = await axiosInstance.get<TickersResult>(
-        `v2/aggs/ticker/${query.ticker}/range/1/${query.timespan}/${query.startDate}/${query.endDate}`,
+        `v2/aggs/ticker/${query.name}/range/1/${query.timespan}/${query.startDate}/${query.endDate}`,
         {
           adjusted: false,
           sort: "asc",
@@ -117,7 +119,7 @@ class StockService {
   static async getOpenCloseData(query: any) {
     try {
       const response = await axiosInstance.get<OpenCloseStockDataResult>(
-        `v1/open-close/${query.ticker}/${query.date}`,
+        `v1/open-close/${query.name}/${query.date}`,
         {
           adjusted: false,
         }
@@ -132,13 +134,27 @@ class StockService {
   static async getPreviousCloseStockData(query: any) {
     try {
       const response = await axiosInstance.get<PreviousCloseResult>(
-        `v2/aggs/ticker/${query.ticker}/prev`,
+        `v2/aggs/ticker/${query.name}/prev`,
         {
           adjusted: false,
         }
       );
 
       return response.results;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async getReportStockData(query: any) {
+    try {
+      const fields = `ticker_name, cost, gain, percentage_performance, timestamp, created_at`;
+
+      const conditions = `created_at >= '${query.from}' and created_at <= '${query.to}'`;
+
+      const response = StockDataRepository.findAll(fields, conditions);
+
+      return response;
     } catch (error) {
       throw error;
     }
